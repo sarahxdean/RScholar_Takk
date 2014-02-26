@@ -9,11 +9,12 @@ i = 1
 while os.path.exists('data'+ str(i)+ '.txt'):
 	i+=1
 name = 'data'+str(i)+'.txt'
+print name
 
 f = open(name, 'w')
 s = '\t'.join('s'+str(num) for num in range(0,40))
 f.write(s+'\ttime\n')
-print s
+#print s
 
 tact = TakkTileread.TakkTile()
 try:
@@ -28,9 +29,9 @@ start = time.time()
 for i in range(count):
 	dic = tact.getData()
 	s = '\t'.join(map(str,dic.values()))+'\t'+str(time.time()-start) #note: if one sensors is gone during sampling bad
-	print s
+	print str(i)
 	f.write(s+'\n')
 f.close()
 #end = time.time()
 tact.stopSampling()
-                                    
+print "done"                               

@@ -1,8 +1,8 @@
 % reads data from files
 function [s] = multiplot (number)
 
-%s = dlmread(strcat('data',num2str(number),'.txt'),'\t', 1, 0);
-s = dlmread(strcat('data3.txt'),'\t', 1, 0);
+s = dlmread(strcat('data',num2str(number),'.txt'),'\t', 1, 0);
+%s = dlmread(strcat('data7.txt'),'\t', 1, 0);
 
 figure(1)
 for i = 1:8
