@@ -127,6 +127,7 @@ class TakkTile:
 		Tadc = lambda cell: data[cell][1]
 		# initialize array for compensated pressure readings
 		Pcomp = {}
+		Tcomp = {}
 		# for element in the returned pressure data...
 		for cell in self.alive:
 			# load the calibration coefficients calculated when the TakkTile class is initialized
@@ -137,9 +138,10 @@ class TakkTile:
 			Pcomp[cell] = cc["a0"] + (cc["b1"] + cc["c11"]*Padc(cell) + cc["c12"]*Tadc(cell))*Padc(cell) + (cc["b2"] + cc["c22"]*Tadc(cell))*Tadc(cell)
 			# convert from 10b number to kPa
 			Pcomp[cell] = 65.0/1023.0*Pcomp[cell]+50
+			Tcomp[cell] = Tadc(cell)
 			# round to keep sane sigfig count
 			Pcomp[cell] = round(Pcomp[cell], 4)
-		return Pcomp 
+		return (Pcomp, Tcomp) 
 	
 	def getCalibrationData(self, index):
 		"""Request the 12 calibration bytes from a sensor at a specified index."""

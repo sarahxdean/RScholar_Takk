@@ -1,9 +1,19 @@
 % reads data from files
-function [s] = multiplot (number)
+function [] = multiplot (s)
 
-s = dlmread(strcat('data',num2str(number),'.txt'),'\t', 1, 0);
-%s = dlmread(strcat('data7.txt'),'\t', 1, 0);
+for j = 0:4
+  figure(j+1)
+  for i = 1:8
+    subplot(2,4,i) 
+    hold on
+    title(num2str(i+8*j))
+    plot(s(:,i+8*j),'.')
+    plot(s(:,i+8*j))
+    hold off
+  end
+end
 
+%{
 figure(1)
 for i = 1:8
   subplot(2,4,i) 
@@ -43,7 +53,7 @@ for i = 1:8
   plot(s(:,i+32))
   hold off
 end
-
+%}
 %subplot(2,4,2)
 %hold on
 %plot(s.s1,'.')
