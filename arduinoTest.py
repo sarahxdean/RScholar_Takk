@@ -1,10 +1,8 @@
-#!/usr/bin/env python
+#usr/bin/env python
 import serial, time
 try:
     i=0
     arduino = serial.Serial('/dev/ttyACM0', 9600)
-    arduino.write('n');
-    arduino.write('t');
     print "Connection successful"
     while True:
         data = arduino.readline()
