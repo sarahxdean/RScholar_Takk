@@ -99,22 +99,17 @@ class TakkTile:
 		# 	therefore the "smaller" delta between delta_up and delta_down is selected
 		#       and then it is added / substracted to the value_history
 
-		#if (len(self.pressureHistory)>0):
-		i=0
-		for p_current in pressure:
-				#p_history=self.pressureHistory[i]
-				#delta_up=abs(p_current-p_history)
-				#delta_down=abs(p_history-(p_current-1024))
-				#if (delta_up<delta_down):
-				#	pressure[i]=p_current
-				#	print "positive"
-				#else:
-				#	pressure[i]=p_current-1024
-				#	print "negative"
-				#i+=1
-			if (p_current > 500):
-				pressure[i] = p_current - 1024
-			i+=1
+		if (len(self.pressureHistory)>0):
+			i=0
+			for p_current in pressure:
+				p_history=self.pressureHistory[i]
+				delta_up=p_current-p_history
+				delta_down=p_history-(p_current-1024)
+				if (delta_up<delta_down):
+					pressure[i]=p_history+delta_up
+				else:
+					pressure[i]=p_history-delta_down
+				i+=1
 
 		self.pressureHistory=pressure
 		temperature = map(abs, temperature)
@@ -140,10 +135,9 @@ class TakkTile:
 			# apply the formula contained on page 13 of Freescale's AN3785
 			# "The 10-bit compensated pressure output for MPL115A, Pcomp, is calculated as follows: 
 			#  Pcomp = a0 + (b1 + c11*Padc + c12*Tadc) * Padc + (b2 + c22*Tadc) * Tadc"
-			#Pcomp[cell] = cc["a0"] + (cc["b1"] + cc["c11"]*Padc(cell) + cc["c12"]*Tadc(cell))*Padc(cell) + (cc["b2"] + cc["c22"]*Tadc(cell))*Tadc(cell)
-			Pcomp[cell] = Padc(cell)
+			Pcomp[cell] = cc["a0"] + (cc["b1"] + cc["c11"]*Padc(cell) + cc["c12"]*Tadc(cell))*Padc(cell) + (cc["b2"] + cc["c22"]*Tadc(cell))*Tadc(cell)
 			# convert from 10b number to kPa
-			#Pcomp[cell] = 65.0/1023.0*Pcomp[cell]+50
+			Pcomp[cell] = 65.0/1023.0*Pcomp[cell]+50
 			Tcomp[cell] = Tadc(cell)
 			# round to keep sane sigfig count
 			Pcomp[cell] = round(Pcomp[cell], 4)

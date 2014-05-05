@@ -16,17 +16,35 @@
 clear all; close all;
 
 %%
+S=sprintf('calibrating...');
+disp(S)
+base = baseline();
+
+x = [1:9];
+
+y = [1:6];
+
+[X,Y] = meshgrid(x,y);
+
+%use the user defined colormap for figure.
+%set the color limits
+caxis manual 
+caxis([-4 4])
+caxis(caxis)
+colormap(autumn);
 
 try
      lHandle = line(nan,nan);
-     set(lHandle, 'XData', zeros(1,100), 'YData', zeros(1,100));
-     drawnow
-     for i=1:10000
+for i=1:10000
         tline1 = python('TakktoMatlab.py','7');
 
 % ------
         %a=strread(ss,'%s','delimiter', ',');
         a = str2num(tline1);
+        a = a - base;
+        b1 = reshape(a(1:40), 5, 8);
+        b2 = [flipud(b1), zeros(5,1)];
+        Z = [b2; zeros(1,9)]
 
 % TODO: it seems that the code below works faster than the previous line ... to check
 %        a={};
@@ -46,22 +64,23 @@ try
         
         %tmpStr=char(strn(1));
         %num=str2num(strn(1))
-    a(40)
+    %a(40)
         % TODO: the plotting works, but slows down the whole system ... 
 
-    X = get(lHandle, 'XData');
-    Y = get(lHandle, 'YData');
+    %X = get(lHandle, 'XData');
+    %Y = get(lHandle, 'YData');
 
-    %if (X.size() > 100)
-     %   X = X(2:X.size());
-     %   Y = Y(2:Y.size());
-    %end
-    
-    X = [X(2:100) i];
-    Y = [Y(2:100) a(40)];
+    %X = [X i];
+    %Y = [Y a(40)];
 
-    set(lHandle, 'XData', X, 'YData', Y);
-    drawnow
+    %set(lHandle, 'XData', X, 'YData', Y);
+        pcolor(X,Y,Z);
+
+%set the x and y labels
+
+    set(gca,'XTick',[1 2 3 4 5 6 7 8 9],'YTick',[1 2 3 4 5 6],'XTicklabel',[' ';'1';'2'; '3'; '4';'5';'6';'7';'8'],'YTicklabel',[' ';'1';'2';'3';'4';'5']);
+   
+    drawnow 
 
      
 
