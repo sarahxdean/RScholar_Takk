@@ -112,7 +112,7 @@ class TakkTile:
 				#	pressure[i]=p_current-1024
 				#	print "negative"
 				#i+=1
-			if (p_current > 500):
+			if (p_current >= 512):
 				pressure[i] = p_current - 1024
 			i+=1
 
