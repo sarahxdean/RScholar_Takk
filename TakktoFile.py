@@ -13,7 +13,7 @@ print name
 
 ft = open('dataruns/temp'+str(i)+'.txt', 'w')
 f = open(name, 'w')
-s = '\t'.join('s'+str(num) for num in range(0,40))
+s = '\t'.join('s'+str(num) for num in range(1,41))
 f.write(s+'\ttime\n')
 ft.write(s+'\ttime\n')
 #print s
