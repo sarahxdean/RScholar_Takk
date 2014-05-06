@@ -6,36 +6,6 @@ import sys, pprint
 import threading
 import Queue
 
-def console(q, lock):
-	while 1:
-		input()
-		with lock:
-			cmd = input('> ')
-		q.put(cmd)
-		if cmd == 'quit':
-			#close file
-			break
-
-def action_sample(lock):
-	with lock:
-		print('--> sampling')
-	while (1):
-		#self.dic, self.temp = tact.getData()
-		print('sampling')
-
-def action_save(lock):
-	with lock:
-		print('--> recording data')
-	#st = '\t'.join(map(str,dic.values()))+'\t'+'\t'.join(map(str,temp.values()))	
-	st = 'example line of data' 
-	force = input('enter force: ')
-	sensor = input('enter sensor number: ')
-	f.write(st+'\t'+force+'\t'+sensor+'\n')
-
-def invalid_input(lock):
-	with lock:
-		print('--> unknown command')
-
 def main(): 
 	i = 1
 	while os.path.exists('char/run'+str(i)+'.txt'):
@@ -49,13 +19,23 @@ def main():
 
 	#tact = TakkTileread.TakkTile()
 	#tact.startSampling(200)
-	
-	cmd_actions = {'sample': action_sample, 'save': action_save}
-	cmd_queue = Queue.Queue()
-	stdout_lock = threading.Lock()
+	while 1:
+		c = raw_input('> ')
+		if c == 'quit':
+			f.close()
+			break
+		elif c == 'r':
+			#dic, temp = tact.getData()
+			#st = '\t'.join(map(str,dic.values()))+'\t'+'\t'.join(map(str,temp.values()))	
+			st = 'example line of data' 
+			print(st)
+			force = str(input('enter force: '))
+			sensor = str(input('enter sensor number: '))
+			f.write(st+'\t'+force+'\t'+sensor+'\n')
 
-	dj = threading.Thread(target=console, args=(cmd_queue, stdout_lock))
-	dj.start()
+
+
+
 
 		
 main()
