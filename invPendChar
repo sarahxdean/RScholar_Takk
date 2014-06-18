@@ -1,0 +1,18 @@
+
+data = zeros(1,82);
+
+while(1)
+    c = input('> ','s');
+        if (strcmp(c, 'quit'))
+            save('char/datarun.txt','data','-ascii','-tabs');
+                break
+        else
+                tline1 = python('TakktoMatlab.py','7');
+                a1 = str2num(tline1);
+                d30 = input('30: ');
+                d31 = input('31: ');
+                a2 = 150 - (d30 + 256*d31)*300/1024;
+                a3 = [a1 a2];
+                data = vertcat(data,a3);
+        end
+end
