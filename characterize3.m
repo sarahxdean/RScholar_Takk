@@ -1,8 +1,10 @@
 
-data = zeros(1,81);
+data = zeros(1,82);
+count = start; %must have a variable called start
+cntf = 0;
 
-while(1)
-    c = input('> ','s');
+while(1) 
+    c = input(strcat(num2str(count),' >'),'s');
         if (strcmp(c, 'quit') || strcmp(c, 'q'))
             data = data(2:end,:);
             s = input('enter file name: ','s');
@@ -19,7 +21,12 @@ while(1)
                 tline1 = python('TakktoMatlab10.py','7');
                 a1 = str2num(tline1) ./ 10;
 
-                a = horzcat(a1, str2num(force))
+                a = horzcat(a1, str2num(force),count)
                 data = vertcat(data,a);
+                cntf = cntf + 1;
+                if(cntf == 5)
+                    count = count + 1;
+                    cntf = 0;
+                end
         end
 end

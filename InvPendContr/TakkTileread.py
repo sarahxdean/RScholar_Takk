@@ -72,10 +72,7 @@ class TakkTile:
 		if self.sampling:
 			data = self.dev.read(0x81, 720, 0, 100)
 			try:
-				#print "got: ", len(data)
 				assert len(data) % 4 == 0
-				#print "expected:", len(self.alive)*4
-				#print data
 			except:
 				print "got: ", len(data)
 				print "expected:", len(self.alive)*4

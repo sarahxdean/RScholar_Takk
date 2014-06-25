@@ -1,5 +1,6 @@
 
 data = zeros(1,81);
+count = 0;
 
 while(1)
     c = input('> ','s');

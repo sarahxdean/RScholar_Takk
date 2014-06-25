@@ -25,7 +25,7 @@ end
 %method two: use otherwise collected sensitivity data
 acdata=adata;
 for i=1:(len/10)
-    acdata(i,1:40) = gain(1,:) .* (adata(i,1:40) - offset(1,:));
+    acdata(i,1:40) = (adata(i,1:40) - transpose(p(:,2))) ./ transpose(p(:,1));
 end
 
 %find CoM for each angle
