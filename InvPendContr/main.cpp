@@ -36,9 +36,6 @@ void PrintErrorCode(void);
 
 int main()
 {
-        Py_Initialize();
-  PyRun_SimpleString("TakktoMatlab.py");
-  Py_Finalize();     
         int baudnum = 1;
         /*
          * One digit of motor represents 0.3515625 degrees.

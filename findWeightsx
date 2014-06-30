@@ -1,0 +1,1 @@
+CoM(:,1) = pendCoMx(data(:,81));

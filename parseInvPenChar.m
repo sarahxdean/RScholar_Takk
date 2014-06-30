@@ -1,5 +1,5 @@
 %average by angle - have an array of avg sensor readings by angle
-odata = trial612a;
+odata = trial612b;
 len = size(odata,1);
 if (mod(len, 10) ~= 0)
     %error
@@ -17,23 +17,23 @@ end
 % need to subtract off calibration!!!
 
 %method one: use the measured calibration from that day
-%acdata=adata;
-%for i=2:(len/10)
-%    acdata(i,1:80) = adata(i,1:80) - adata(1,1:80);
-%end
+acdata=adata;
+for i=2:(len/10)
+    acdata(i,1:80) = adata(i,1:80) - adata(1,1:80);
+end
 
 %method two: use otherwise collected sensitivity data
-acdata=adata;
-for i=1:(len/10)
-    acdata(i,1:40) = (adata(i,1:40) - transpose(p(:,2))) ./ transpose(p(:,1));
-end
+%acdata=adata;
+%for i=1:(len/10)
+%    acdata(i,1:40) = (adata(i,1:40) - transpose(p(:,2))) ./ transpose(p(:,1));
+%end
 
 %find CoM for each angle
 
 CoM = zeros(len/10, 3);
 
 for i=1:(len/10)
-    CoM(i,:) = [acdata(i,81) arrayCoM(acdata(i,1:40))];
+    CoM(i,:) = [acdata(i,81) weightedCoM(acdata(i,1:40))];
 end
 
 %plot CoM
@@ -42,7 +42,10 @@ hold on
 caxis manual
 caxis([-20 20]);
 
-scatter(CoM(:,2),CoM(:,3),50,CoM(:,1),'fill');
+%scatter(CoM(:,2),CoM(:,3),50,CoM(:,1),'fill');
+
+angles =  24.*sin(CoM(:,1))+24.8;
+scatter(angles,zeros(length(CoM),1)+15);
 axis([0 42 0 28])
 colorbar
 hold off
