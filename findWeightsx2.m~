@@ -20,7 +20,7 @@ for i=1:length(data(:,1))
 end
 h = zeros(2*length(data(:,1))+2,1);
 %weight = lsqlin(observed,h,[],[],[],[],zeros(length(data(:,1)),1)+0.001,[]);
-weight = homogRegress(observed);
+weight = homogRegress(observe
 
 
 %plot what i've seen

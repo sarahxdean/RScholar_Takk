@@ -1,6 +1,8 @@
 x = [4.76 2.38 4.76 2.38 4.76 10.76 8.38 10.76 8.38 10.76 16.76 14.38 16.76 14.38 16.76 22.76 20.38 22.76 20.38 22.76 28.76 26.38 28.76 26.38 28.76 34.76 32.38 34.76 32.38 34.76 40.76 38.38 40.76 38.38 40.76 46.76 44.38 46.76 44.38 46.76] - 24.808;
+y = [27 21 15 9 3 27 21 15 9 3 27 21 15 9 3 27 21 15 9 3 27 21 15 9 3 27 21 15 9 3 27 21 15 9 3 27 21 15 9 3] - 15;
 count = 0;
 CoMx = zeros(1,2);
+CoMy = zeros(1,2)
 
 while(1)
     c = input('> ','s');
@@ -8,7 +10,7 @@ while(1)
             break
         else
             
-                [tmp,d] = system('../DXL_SDK_LINUX_v1_01/example/InvPendContr/getData.o');
+                [tmp,d] = system('../DXL_SDK_LINUX_v1_01/example/InvPendContr/getCoMx.o');
                 %d
                 %a1=zeros(1,80);
                 %for i=1:10
@@ -23,6 +25,8 @@ while(1)
             else
                 CoMx(:,2) = sum(transpose(a(:,1:40)-baseline(:,1:40)) .* weight .* transpose(x));
                 CoMx(:,1) = pendCoMx(a(:,81))
+                CoMy(:,2) = sum(transpose(a(:,1:40)-baseline(:,1:40)) .* weight .* transpose(y));
+                CoMy(:,1) = 0
             end
         end
 end

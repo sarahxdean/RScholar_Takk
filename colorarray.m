@@ -41,9 +41,10 @@ for i=1:10000
         
         a = str2num(tline1);
         a = a - base;
-        b1 = reshape(a(1:40), 5, 8);
-        b2 = [flipud(b1), zeros(5,1)];
-        Z = [b2; zeros(1,9)];
+        %b1 = reshape(a(1:40), 5, 8);
+        %b2 = [flipud(b1), zeros(5,1)];
+        %Z = [b2; zeros(1,9)];
+        Z = reshapeArray(a)
                 
         pcolor(X,Y,Z);
         ct = arrayCoM(a(1:40));
