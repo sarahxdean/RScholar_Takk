@@ -18,7 +18,8 @@ while(1)
                   %  a1 = a1 + str2num(tline1);
                 %end
                 %a1 = a1 ./10;
-                a1 = str2num(d)
+                a1 = str2num(d);
+                a1(81)
                 data = vertcat(data,a1);
                 count=count+1
         end

@@ -40,6 +40,8 @@ for i=1:length(datay(:,1))
 end
 
 weight = homogRegress(observed);
+%weight = lsqlin(observed,zeros(length(observed(:,1)),1),[],[],[],[],zeros(40,1),[]);
+
 
 %plot what i've seen
 h(:,2) = observed*weight

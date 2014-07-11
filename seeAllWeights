@@ -1,0 +1,3 @@
+allweights = allweights(:,2:end);
+
+mean(allweights,2)
