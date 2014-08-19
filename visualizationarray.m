@@ -46,7 +46,7 @@ try
         
         %tmpStr=char(strn(1));
         %num=str2num(strn(1))
-    a(40)
+    toplot = a(1)
         % TODO: the plotting works, but slows down the whole system ... 
 
     X = get(lHandle, 'XData');
@@ -58,7 +58,7 @@ try
     %end
     
     X = [X(2:100) i];
-    Y = [Y(2:100) a(40)];
+    Y = [Y(2:100) toplot];
 
     set(lHandle, 'XData', X, 'YData', Y);
     drawnow

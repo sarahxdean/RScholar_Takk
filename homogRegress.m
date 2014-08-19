@@ -2,9 +2,9 @@ function [x] = homogRegress(A)
 
 [V,D] = eig(transpose(A)*A);
 
-evals = sum(D,1)
+evals = sum(D,1);
 
-index = find(evals == min(abs(evals)))
+index = find(evals == min(abs(evals)));
 
 xp = V(:,index);
 

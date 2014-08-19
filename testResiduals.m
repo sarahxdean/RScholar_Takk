@@ -1,15 +1,15 @@
-function [r] = testResiduals(data,baseline,weight,actual,normalize,CoM)
+function [r] = testResiduals(data,baseline,weight,actual,pos,normalize,CoM)
 
-if nargin == 5
-    product = productToRegress(data,baseline,1) * weight;
+if normalize
+    product = productToRegress(data,baseline,pos,1) * weight;
     
-elseif nargin == 6
-    product = productToRegress(data,baseline,0,CoM) * weight;
+elseif nargin > 6
+    product = productToRegress(data,baseline,pos,0,CoM) * weight;
 else
-    product = productToRegress(data,baseline) * weight;
+    product = productToRegress(data,baseline,pos,0) * weight;
 end
 
-
+actual;
 
 r = product - actual;
 
